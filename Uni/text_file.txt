@@ -1,0 +1,9 @@
+The following is an instance of a local machine dependent optimization. To set a register to 0, the obvious way
+ is to use the constant '0' in an instruction that sets a register value to a constant. A less obvious way is
+  to XOR a register with itself. It is up to the compiler to know which instruction variant to use. On many
+   RISC machines, both instructions would be equally appropriate, since they would both be the same length
+    and take the same time. On many other microprocessors such as the Intel x86 family, it turns out that
+    the XOR variant is shorter and probably faster, as there will be no need to decode an immediate operand,
+     nor use the internal "immediate operand register". (A potential problem with this is that XOR may
+      introduce a data dependency on the previous value of the register, causing a pipeline stall. However,
+       processors often have XOR of a register with itself as a special case that doesn't cause stalls.)
